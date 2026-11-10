@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YOZAKURA | GEARTS Digital Art Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif JP"', 'Georgia', 'serif'],
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            midnight: '#0F172A',
+            sakura: { 400: '#f472b6', 500: '#ec4899', 600: '#db2777' },
+            moon: '#fcd34d',
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { boxShadow: '0 0 15px rgba(236,72,153,0.3), 0 0 40px rgba(236,72,153,0.1)' },
+              '50%': { boxShadow: '0 0 25px rgba(236,72,153,0.5), 0 0 60px rgba(236,72,153,0.2)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== BASE ========== */
+    * { cursor: none !important; margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0F172A;
+      color: #e2e8f0;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: url('images/hero-bg.jpg') center/cover no-repeat;
+      opacity: 0.35;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 15% 20%, rgba(236,72,153,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 85% 75%, rgba(139,92,246,0.06) 0%, transparent 55%);
+      animation: ambientShift 18s ease-in-out infinite alternate;
+    }
+    @keyframes ambientShift {
+      0%   { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.7; transform: scale(1.08); }
+    }
+
+    /* ========== CUSTOM SCROLLBAR ========== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0F172A; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ec4899, #f472b6); border-radius: 3px; }
+
+    /* ========== CANVAS ========== */
+    #sakura-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    /* ========== CUSTOM CURSOR ========== */
+    #cursor-dot {
+      position: fixed; width: 12px; height: 12px; border-radius: 50%;
+      background: radial-gradient(circle, #f472b6, #ec4899);
+      box-shadow: 0 0 12px #ec4899, 0 0 30px rgba(236,72,153,0.4);
+      pointer-events: none; z-index: 99999;
+      transition: transform 0.08s ease-out;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-trail {
+      position: fixed; width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(244,114,182,0.5);
+      box-shadow: 0 0 8px rgba(236,72,153,0.3);
+      pointer-events: none; z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease;
+    }
+
+    /* ========== EXPLORE GALLERY BUTTON ========== */
+    .explore-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 2rem; border-radius: 9999px;
+      border: 1.5px solid rgba(236,72,153,0.6);
+      background: rgba(236,72,153,0.12);
+      color: #f9a8d4; font-size: 0.875rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(236,72,153,0.15);
+      text-decoration: none;
+    }
+    .explore-btn:hover {
+      background: rgba(236,72,153,0.25);
+      border-color: rgba(236,72,153,0.9);
+      box-shadow: 0 0 35px rgba(236,72,153,0.35);
+      transform: scale(1.04);
+      color: #fff;
+    }
+
+    /* ========== KANJI WATERMARKS ========== */
+    .kanji-watermark {
+      position: absolute; font-family: 'Noto Serif JP', serif;
+      font-size: clamp(6rem, 15vw, 14rem); font-weight: 700;
+      color: rgba(236,72,153,0.04); z-index: 0;
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+
+    /* ========== GLASSMORPHISM ========== */
+    .glass { background: rgba(15,23,42,0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(236,72,153,0.12); }
+    .glass-card { background: rgba(15,23,42,0.80); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(236,72,153,0.15); border-radius: 1rem; transition: all 0.4s ease; }
+    .glass-card:hover { border-color: rgba(236,72,153,0.4); box-shadow: 0 0 30px rgba(236,72,153,0.1); }
+
+    /* ========== GLOW BORDER ========== */
+    .glow-border {
+      border: 1px solid rgba(236,72,153,0.3);
+      box-shadow: 0 0 15px rgba(236,72,153,0.15), inset 0 0 15px rgba(236,72,153,0.05);
+    }
+    .glow-border-gold {
+      border: 1px solid rgba(252,211,77,0.3);
+      box-shadow: 0 0 15px rgba(252,211,77,0.1), inset 0 0 15px rgba(252,211,77,0.03);
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, transparent, #ec4899, #f472b6, transparent); transform: translateX(-50%); }
+    @media (max-width: 768px) { .timeline-line { left: 1.5rem; } }
+
+    /* ========== FLEX CAROUSEL (Part I) ========== */
+    .flex-carousel { display: flex; gap: 0.5rem; height: 420px; }
+    .flex-carousel .fc-item {
+      flex: 1; min-width: 60px; border-radius: 1rem; overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; cursor: none;
+    }
+    .flex-carousel .fc-item:hover { flex: 3; }
+    .flex-carousel .fc-item .fc-content {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem;
+      background: linear-gradient(transparent, rgba(15,23,42,0.95));
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .flex-carousel .fc-item:hover .fc-content { opacity: 1; }
+
+    /* ========== PRISM CAROUSEL (Part II) ========== */
+    .prism-viewport {
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+      height: 520px;
+      position: relative;
+      overflow: hidden;
+    }
+    .prism-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .prism-slide {
+      position: absolute;
+      width: 340px;
+      height: 460px;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform, opacity, filter;
+      backface-visibility: hidden;
+    }
+    .prism-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+      background: linear-gradient(
+        135deg,
+        rgba(236,72,153,0.0) 0%,
+        rgba(236,72,153,0.25) 20%,
+        rgba(252,211,77,0.2) 40%,
+        rgba(139,92,246,0.2) 60%,
+        rgba(56,189,248,0.15) 80%,
+        rgba(236,72,153,0.0) 100%
+      );
+      background-size: 300% 300%;
+    }
+    .prism-slide.sweeping::before {
+      opacity: 1;
+      animation: prismSweep 0.8s ease-out forwards;
+    }
+    @keyframes prismSweep {
+      0% { background-position: 100% 100%; opacity: 0; }
+      30% { opacity: 1; }
+      100% { background-position: 0% 0%; opacity: 0; }
+    }
+    .prism-slide .prism-glow {
+      position: absolute;
+      inset: -2px;
+      border-radius: 1.25rem;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      background: conic-gradient(
+        from 0deg,
+        rgba(236,72,153,0.5),
+        rgba(252,211,77,0.4),
+        rgba(139,92,246,0.4),
+        rgba(56,189,248,0.4),
+        rgba(52,211,153,0.3),
+        rgba(236,72,153,0.5)
+      );
+      filter: blur(12px);
+    }
+    .prism-slide.active .prism-glow { opacity: 0.6; }
+    .prism-slide .prism-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid rgba(236,72,153,0.2);
+      transition: border-color 0.5s ease;
+    }
+    .prism-slide.active .prism-inner { border-color: rgba(236,72,153,0.5); }
+    .prism-slide .prism-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .prism-slide .prism-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 3;
+      padding: 1.5rem;
+      background: linear-gradient(transparent 0%, rgba(15,23,42,0.95) 50%);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+    .prism-slide.active .prism-info {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .prism-slide .prism-badge-row {
+      position: absolute;
+      top: 1rem; left: 1rem; right: 1rem;
+      z-index: 4;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .prism-slide.active .prism-badge-row { opacity: 1; }
+
+    .prism-reflection {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%) scaleY(-0.3) perspective(600px) rotateX(20deg);
+      width: 340px;
+      height: 100px;
+      border-radius: 0 0 1.25rem 1.25rem;
+      overflow: hidden;
+      opacity: 0.12;
+      filter: blur(4px);
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+    }
+
+    /* Nav arrows */
+    .prism-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15,23,42,0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(236,72,153,0.25);
+      color: #f472b6;
+      font-size: 1.25rem;
+      transition: all 0.3s ease;
+    }
+    .prism-nav:hover {
+      background: rgba(236,72,153,0.15);
+      border-color: rgba(236,72,153,0.5);
+      box-shadow: 0 0 20px rgba(236,72,153,0.2);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .prism-nav.prev { left: 1rem; }
+    .prism-nav.next { right: 1rem; }
+    @media (max-width: 768px) {
+      .prism-slide { width: 260px; height: 380px; }
+      .prism-viewport { height: 440px; }
+      .prism-reflection { width: 260px; }
+    }
+    @media (max-width: 480px) {
+      .prism-slide { width: 220px; height: 340px; }
+      .prism-viewport { height: 400px; }
+      .prism-reflection { width: 220px; }
+    }
+
+    /* Indicator dots */
+    .prism-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .prism-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(236,72,153,0.2);
+      border: 1px solid rgba(236,72,153,0.15);
+      transition: all 0.4s ease;
+    }
+    .prism-dot.active {
+      background: #ec4899;
+      box-shadow: 0 0 10px rgba(236,72,153,0.5);
+      transform: scale(1.3);
+    }
+
+    /* ========== LIGHTBOX ========== */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(15,23,42,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .lightbox-overlay.active { opacity: 1; pointer-events: auto; }
+    .lightbox-content {
+      max-width: 900px; width: 90%; max-height: 90vh; overflow-y: auto;
+      border-radius: 1.5rem; padding: 2.5rem;
+    }
+
+    /* ========== AMBIENT TOGGLE ========== */
+    .audio-toggle {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 8000;
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .audio-toggle:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(236,72,153,0.4); }
+    .audio-bars { display: flex; align-items: flex-end; gap: 2px; height: 18px; }
+    .audio-bars span {
+      width: 3px; background: #f472b6; border-radius: 2px;
+      animation: audioBar 1.2s ease-in-out infinite;
+    }
+    .audio-bars.paused span { animation: none; height: 4px !important; }
+    .audio-bars span:nth-child(1) { animation-delay: 0s; }
+    .audio-bars span:nth-child(2) { animation-delay: 0.2s; }
+    .audio-bars span:nth-child(3) { animation-delay: 0.4s; }
+    .audio-bars span:nth-child(4) { animation-delay: 0.1s; }
+    @keyframes audioBar {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+
+    /* ========== NAV ACTIVE ========== */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 50%; width: 0; height: 2px;
+      background: #ec4899; transition: all 0.3s ease; transform: translateX(-50%);
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    /* ========== SECTION REVEAL ========== */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== APPENDIX EVIDENCE BOX ========== */
+    .evidence-box {
+      border: 1px solid rgba(236,72,153,0.2); border-radius: 1rem;
+      padding: 1.5rem; text-align: center; transition: all 0.3s ease;
+      min-height: 200px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: rgba(15,23,42,0.6);
+      overflow: hidden;
+    }
+    .evidence-box:hover {
+      border-color: rgba(236,72,153,0.45);
+      background: rgba(15,23,42,0.8);
+      box-shadow: 0 0 25px rgba(236,72,153,0.15);
+      transform: translateY(-2px);
+    }
+    .evidence-box img, .evidence-box video {
+      width: 100%; height: 100%; min-height: 180px; max-height: 240px;
+      object-fit: cover; border-radius: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== SAKURA CANVAS ==================== -->
+<canvas id="sakura-canvas"></canvas>
+
+<!-- ==================== CUSTOM CURSOR ==================== -->
+<div id="cursor-dot"></div>
+
+<!-- ==================== LIGHTBOX MODAL ==================== -->
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+  <div class="lightbox-content glass-card glow-border" onclick="event.stopPropagation()">
+    <button onclick="closeLightbox()" class="absolute top-4 right-4 text-pink-400 hover:text-pink-300 text-2xl transition-colors">&times;</button>
+    <div id="lightbox-body"></div>
+  </div>
+</div>
+
+<!-- ==================== AMBIENT AUDIO TOGGLE ==================== -->
+<button id="audio-btn" class="audio-toggle glass glow-border" onclick="toggleAudio()" title="Toggle Ambient Sound">
+  <div id="audio-bars" class="audio-bars paused">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</button>
+
+<!-- ==================== STICKY HEADER ==================== -->
+<header class="fixed top-0 left-0 right-0 z-[9999] glass border-b border-pink-500/10">
+  <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-2 group">
+      <span class="text-2xl">🌸</span>
+      <span class="font-serif font-bold text-pink-400 text-lg tracking-wide group-hover:text-pink-300 transition-colors">夜桜</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#part1" class="nav-link text-sm font-medium text-slate-300 hover:text-pink-400 transition-colors">Part I</a>
+      <a href="#part2" class="nav-link text-sm font-medium text-slate-300 hover:text-pink-400 transition-colors">Part II</a>
+      <a href="#reflection" class="nav-link text-sm font-medium text-slate-300 hover:text-pink-400 transition-colors">Final Reflection</a>
+      <a href="#appendices" class="nav-link text-sm font-medium text-slate-300 hover:text-pink-400 transition-colors">Appendices</a>
+    </div>
+    <button id="mobile-menu-btn" class="md:hidden text-pink-400 text-xl" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">☰</button>
+  </nav>
+  <div id="mobile-nav" class="hidden md:hidden px-6 pb-4 space-y-2">
+    <a href="#part1" class="block text-sm text-slate-300 hover:text-pink-400 py-1">Part I</a>
+    <a href="#part2" class="block text-sm text-slate-300 hover:text-pink-400 py-1">Part II</a>
+    <a href="#reflection" class="block text-sm text-slate-300 hover:text-pink-400 py-1">Final Reflection</a>
+    <a href="#appendices" class="block text-sm text-slate-300 hover:text-pink-400 py-1">Appendices</a>
+  </div>
+</header>
+
+<!-- ==================== HERO SECTION ==================== -->
+<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 z-10">
+  <div class="kanji-watermark top-10 left-4 md:left-10">桜</div>
+  <div class="kanji-watermark bottom-10 right-4 md:right-10" style="color:rgba(252,211,77,0.03)">夜</div>
+
+  <div class="relative z-[5] max-w-3xl mx-auto reveal">
+    <p class="text-amber-300/80 text-sm tracking-[0.4em] uppercase font-medium mb-4 animate-float">✦ GEARTS Digital Art Portfolio ✦</p>
+
+    <h1 class="font-serif text-5xl md:text-7xl font-bold mb-3">
+      <span class="bg-gradient-to-r from-pink-400 via-pink-300 to-amber-300 bg-clip-text text-transparent">YOZAKURA</span>
+    </h1>
+    <p class="font-serif text-xl md:text-2xl text-slate-300 mb-8 italic">"Who Am I Becoming?"</p>
+
+    <div class="space-y-1 text-slate-400 text-sm mb-10">
+      <p class="text-slate-300 font-medium text-base">Catherine Joy P. Salazar</p>
+      <p>GEARTS &nbsp;|&nbsp; BSIT 3A &nbsp;|&nbsp; FAITH Colleges</p>
+    </div>
+
+    <!-- INTRO REFLECTION BOX -->
+    <div class="glass-card glow-border p-6 md:p-8 text-left max-w-2xl mx-auto animate-glow-pulse">
+      <h3 class="font-serif text-amber-300 text-sm tracking-widest uppercase mb-3">✦ Introductory Reflection</h3>
+      <p class="text-slate-300 leading-relaxed text-sm md:text-base italic">
+        This portfolio collects my work for GEARTS. Part I shows all of my course outputs.
+        Part II shows three artworks that I made on my own. The final reflection and the
+        appendices with my proof of process are coming soon.
+      </p>
+    </div>
+
+    <!-- EXPLORE GALLERY BUTTON -->
+    <div class="mt-8">
+      <a href="#part2" class="explore-btn">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        Explore Gallery
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 z-10 animate-bounce">
+    <a href="#part1" class="text-pink-400/60 hover:text-pink-400 transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== PART I: ART APPRECIATION OUTPUTS ==================== -->
+<section id="part1" class="relative py-24 px-6 z-10">
+  <div class="kanji-watermark -top-8 right-4 md:right-20">芸術</div>
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Part I</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">My Art Appreciation Journey</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">All eight of my GEARTS outputs, shown one by one with their AI usage.</p>
+      <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-6"></div>
+    </div>
+
+    <!-- FLEX CAROUSEL: COURSE OUTPUTS -->
+    <div class="mb-16 reveal">
+      <h3 class="font-serif text-xl text-amber-300 mb-6 text-center">✦ Course Outputs: Interactive Gallery</h3>
+      <div class="flex-carousel">
+        <!-- Output 1 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(15,23,42,0.9)), url('images/ScribbleArt.jpg') center/cover;" onclick="openLightbox('mod1')">
+          <div class="absolute top-4 left-4 bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Output 1</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Scribble Art</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+        <!-- Output 2 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(252,211,77,0.1), rgba(15,23,42,0.9)), url('images/BookSpinePoetry1.jpg') center/cover;" onclick="openLightbox('mod2')">
+          <div class="absolute top-4 left-4 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Output 2</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Book Spine Poetry</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+        <!-- Output 3 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(15,23,42,0.9)), url('images/CoffeePainting.jpg') center/cover;" onclick="openLightbox('mod3')">
+          <div class="absolute top-4 left-4 bg-purple-500/20 backdrop-blur-sm text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">Output 3</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Coffee Painting</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+        <!-- Output 4 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(15,23,42,0.9)), url('images/BlackOutPoetry.jpg') center/cover;" onclick="openLightbox('mod4')">
+          <div class="absolute top-4 left-4 bg-emerald-500/20 backdrop-blur-sm text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">Output 4</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Black Out Poetry</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+        <!-- Output 5 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(15,23,42,0.9)), url('') center/cover;" onclick="openLightbox('mod5')">
+          <div class="absolute top-4 left-4 bg-orange-500/20 backdrop-blur-sm text-orange-300 text-xs font-bold px-3 py-1 rounded-full border border-orange-500/30">Output 5</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Artwork Analysis (Video)</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+        <!-- Output 6 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(56,189,248,0.1), rgba(15,23,42,0.9)), url('') center/cover;" onclick="openLightbox('mod6')">
+          <div class="absolute top-4 left-4 bg-sky-500/20 backdrop-blur-sm text-sky-300 text-xs font-bold px-3 py-1 rounded-full border border-sky-500/30">Output 6</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">AI Art Appropriation</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-pink-500/20 text-pink-300 px-2 py-0.5 rounded-full">AI Used</span>
+          </div>
+        </div>
+        <!-- Output 7 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(15,23,42,0.9)), url('images/Painting.jpg') center/cover;" onclick="openLightbox('mod7')">
+          <div class="absolute top-4 left-4 bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Output 7</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Painting</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+        <!-- Output 8 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(252,211,77,0.1), rgba(15,23,42,0.9)), url('') center/cover;" onclick="openLightbox('mod8')">
+          <div class="absolute top-4 left-4 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Output 8</div>
+          <div class="fc-content">
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Multimedia Video</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
+          </div>
+        </div>
+      </div>
+      <p class="text-slate-500 text-xs text-center mt-4 italic">↔ Hover over each output to expand &nbsp;•&nbsp; Click for details</p>
+    </div>
+
+    <!-- DETAILED TIMELINE -->
+    <div class="relative reveal">
+      <div class="timeline-line hidden md:block"></div>
+      <div class="space-y-12">
+
+        <!-- Timeline Item 1 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:text-right md:pr-12">
+            <div class="glass-card p-6 glow-border">
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 1</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Scribble Art</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">An artwork built from scribbled lines, shapes, and colors.</p>
+              <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Drawing</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex w-4 h-4 bg-pink-500 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-pink-500/30"></div>
+          <div class="md:w-1/2 md:pl-12"></div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:pr-12"></div>
+          <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
+          <div class="md:w-1/2 md:pl-12">
+            <div class="glass-card p-6 glow-border-gold">
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 2</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Book Spine Poetry</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A poem made by stacking books so the titles on the spines read as lines.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Found Poetry</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:text-right md:pr-12">
+            <div class="glass-card p-6 glow-border">
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 3</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Coffee Painting</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A painting made with coffee as the paint.</p>
+              <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Painting</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex w-4 h-4 bg-pink-500 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-pink-500/30"></div>
+          <div class="md:w-1/2 md:pl-12"></div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:pr-12"></div>
+          <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
+          <div class="md:w-1/2 md:pl-12">
+            <div class="glass-card p-6 glow-border-gold">
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 4</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Black Out Poetry</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A poem found by blacking out most of the words on a printed page.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Found Poetry</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 5 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:text-right md:pr-12">
+            <div class="glass-card p-6 glow-border">
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 5</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Artwork Analysis (Video)</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A video where I look closely at an artwork and explain what I see in it.</p>
+              <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Video</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex w-4 h-4 bg-pink-500 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-pink-500/30"></div>
+          <div class="md:w-1/2 md:pl-12"></div>
+        </div>
+
+        <!-- Timeline Item 6 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:pr-12"></div>
+          <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
+          <div class="md:w-1/2 md:pl-12">
+            <div class="glass-card p-6 glow-border-gold">
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 6</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">AI Art Appropriation</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">An activity where existing art is reworked into a new piece using AI.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Digital Art</span>
+                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">⚡ AI Used</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 7 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:text-right md:pr-12">
+            <div class="glass-card p-6 glow-border">
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 7</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Painting</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A painting made for the course.</p>
+              <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Painting</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex w-4 h-4 bg-pink-500 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-pink-500/30"></div>
+          <div class="md:w-1/2 md:pl-12"></div>
+        </div>
+
+        <!-- Timeline Item 8 -->
+        <div class="relative flex flex-col md:flex-row items-center gap-6">
+          <div class="md:w-1/2 md:pr-12"></div>
+          <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
+          <div class="md:w-1/2 md:pl-12">
+            <div class="glass-card p-6 glow-border-gold">
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 8</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Multimedia Video</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A video that combines different kinds of media into one piece.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Video</span>
+                <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PART II: ARTISTIC EXPLORATION ==================== -->
+<section id="part2" class="relative py-24 px-6 z-10">
+  <div class="kanji-watermark -top-8 left-4 md:left-10">探求</div>
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Part II</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">My Artistic Exploration</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Three artworks across three art forms: photography, sculpting with weaving and painting, and dance.</p>
+      <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-6"></div>
+    </div>
+
+    <!-- PRISM CAROUSEL: ARTWORKS -->
+    <div class="reveal">
+      <div class="prism-viewport" id="prism-carousel">
+        <div class="prism-track" id="prism-track">
+
+          <!-- Slide 1: Photography -->
+          <div class="prism-slide" data-index="0">
+            <div class="prism-glow"></div>
+            <div class="prism-inner">
+              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(236,72,153,0.25) 0%, rgba(15,23,42,0.95) 60%, rgba(139,92,246,0.1) 100%);"></div>
+              <div class="prism-badge-row">
+                <span class="bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">01 · Photography</span>
+                <span class="bg-green-500/20 backdrop-blur-sm text-green-300 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">100% Human-Made</span>
+              </div>
+              <div class="prism-info">
+                <h4 class="font-serif text-xl text-white font-semibold mb-1">Photography</h4>
+                <p class="text-slate-400 text-xs mb-1">Photography</p>
+                <p class="text-slate-500 text-xs mb-3">Full details coming soon.</p>
+                <a href="#appendix1" class="inline-block text-[10px] bg-pink-500/30 text-pink-200 px-3 py-1 rounded-full hover:bg-pink-500/50 transition-colors" onclick="event.stopPropagation()">View Proof of Process (Appendix 1) →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Sculpting with Weaving and Painting -->
+          <div class="prism-slide" data-index="1">
+            <div class="prism-glow"></div>
+            <div class="prism-inner">
+              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(252,211,77,0.2) 0%, rgba(15,23,42,0.95) 60%, rgba(236,72,153,0.08) 100%);"></div>
+              <div class="prism-badge-row">
+                <span class="bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">02 · Sculpting</span>
+                <span class="bg-green-500/20 backdrop-blur-sm text-green-300 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">100% Human-Made</span>
+              </div>
+              <div class="prism-info">
+                <h4 class="font-serif text-xl text-white font-semibold mb-1">Sculpting with Weaving and Painting</h4>
+                <p class="text-slate-400 text-xs mb-1">Sculpture, Weaving, Painting</p>
+                <p class="text-slate-500 text-xs mb-3">Full details coming soon.</p>
+                <a href="#appendix2" class="inline-block text-[10px] bg-amber-500/30 text-amber-200 px-3 py-1 rounded-full hover:bg-amber-500/50 transition-colors" onclick="event.stopPropagation()">View Proof of Process (Appendix 2) →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Dancing -->
+          <div class="prism-slide" data-index="2">
+            <div class="prism-glow"></div>
+            <div class="prism-inner">
+              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(15,23,42,0.95) 60%, rgba(252,211,77,0.08) 100%);"></div>
+              <div class="prism-badge-row">
+                <span class="bg-purple-500/20 backdrop-blur-sm text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">03 · Dancing</span>
+                <span class="bg-green-500/20 backdrop-blur-sm text-green-300 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">100% Human-Made</span>
+              </div>
+              <div class="prism-info">
+                <h4 class="font-serif text-xl text-white font-semibold mb-1">Dancing</h4>
+                <p class="text-slate-400 text-xs mb-1">Dance</p>
+                <p class="text-slate-500 text-xs mb-3">Full details coming soon.</p>
+                <a href="#appendix3" class="inline-block text-[10px] bg-purple-500/30 text-purple-200 px-3 py-1 rounded-full hover:bg-purple-500/50 transition-colors" onclick="event.stopPropagation()">View Proof of Process (Appendix 3) →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Nav Arrows -->
+        <button class="prism-nav prev" onclick="prismGo(-1)" aria-label="Previous">‹</button>
+        <button class="prism-nav next" onclick="prismGo(1)" aria-label="Next">›</button>
+      </div>
+
+      <!-- Dots -->
+      <div class="prism-dots" id="prism-dots"></div>
+    </div>
+    <p class="text-slate-500 text-xs text-center italic mt-4 reveal">◂ ▸ Navigate artworks &nbsp;•&nbsp; Click for full details</p>
+  </div>
+</section>
+
+<!-- ==================== FINAL REFLECTION ==================== -->
+<section id="reflection" class="relative py-24 px-6 z-10">
+  <div class="kanji-watermark -top-4 right-4 md:right-20">自己</div>
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Final Reflection</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">Who Am I Becoming?</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Looking back at this course and looking ahead.</p>
+      <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-6"></div>
+    </div>
+
+    <div class="space-y-8">
+      <!-- Reflection Prompt 1 -->
+      <div class="glass-card glow-border p-6 md:p-8 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl mt-1">🌸</span>
+          <div>
+            <h4 class="font-serif text-lg text-pink-400 mb-2">How has this course changed my understanding of art?</h4>
+            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reflection Prompt 2 -->
+      <div class="glass-card glow-border-gold p-6 md:p-8 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl mt-1">🎨</span>
+          <div>
+            <h4 class="font-serif text-lg text-amber-300 mb-2">What did I discover about myself through creating art?</h4>
+            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reflection Prompt 3 -->
+      <div class="glass-card glow-border p-6 md:p-8 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl mt-1">🌙</span>
+          <div>
+            <h4 class="font-serif text-lg text-pink-400 mb-2">How does art connect to my identity, culture, or values?</h4>
+            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reflection Prompt 4 -->
+      <div class="glass-card glow-border-gold p-6 md:p-8 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl mt-1">✨</span>
+          <div>
+            <h4 class="font-serif text-lg text-amber-300 mb-2">Where do I go from here? Who am I becoming?</h4>
+            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Usage Disclosure -->
+      <div class="glass-card p-6 border border-slate-700/50 reveal">
+        <h4 class="font-serif text-sm text-slate-400 tracking-widest uppercase mb-3">✦ AI Usage Disclosure: Final Reflection</h4>
+        <p class="text-slate-500 text-sm">
+          The AI usage disclosure for the final reflection will be added when the reflection is finished.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== APPENDICES ==================== -->
+<section id="appendices" class="relative py-24 px-6 z-10">
+  <div class="kanji-watermark -top-8 left-4 md:left-10" style="color:rgba(252,211,77,0.03)">証</div>
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Appendices</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">Proof of Work and Authenticity</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">Proof of process for each Part II artwork: sketches, work in progress, final work, links, and screenshots.</p>
+      <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-6"></div>
+    </div>
+
+    <!-- Appendix 1 -->
+    <div id="appendix1" class="mb-12 reveal">
+      <div class="glass-card p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-pink-500/20 text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">APPENDIX 1</span>
+          <h3 class="font-serif text-xl text-white">Photography: Proof of Process</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">📷</span>
+            <p class="text-slate-500 text-sm">Raw / Unedited Photo</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">🖥️</span>
+            <p class="text-slate-500 text-sm">Editing Process Screenshot</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">🌟</span>
+            <p class="text-slate-500 text-sm">Final Photo</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+        </div>
+        <div class="mt-4 p-4 bg-slate-800/40 rounded-lg border border-slate-700/30">
+          <p class="text-slate-500 text-xs"><strong class="text-slate-400">AI Used:</strong> <span class="text-green-400">None</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appendix 2 -->
+    <div id="appendix2" class="mb-12 reveal">
+      <div class="glass-card p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">APPENDIX 2</span>
+          <h3 class="font-serif text-xl text-white">Sculpting with Weaving and Painting: Proof of Process</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">✏️</span>
+            <p class="text-slate-500 text-sm">Design Sketch</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">🔨</span>
+            <p class="text-slate-500 text-sm">Work in Progress</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">🏺</span>
+            <p class="text-slate-500 text-sm">Finished Artwork Photo</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+        </div>
+        <div class="mt-4 p-4 bg-slate-800/40 rounded-lg border border-slate-700/30">
+          <p class="text-slate-500 text-xs"><strong class="text-slate-400">AI Used:</strong> <span class="text-green-400">None</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appendix 3 -->
+    <div id="appendix3" class="mb-12 reveal">
+      <div class="glass-card p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">APPENDIX 3</span>
+          <h3 class="font-serif text-xl text-white">Dancing: Proof of Process</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">📝</span>
+            <p class="text-slate-500 text-sm">Choreography Notes / Plan</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">🎥</span>
+            <p class="text-slate-500 text-sm">Rehearsal Screenshot</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+          <div class="evidence-box">
+            <span class="text-3xl mb-2">💃</span>
+            <p class="text-slate-500 text-sm">Final Performance Video</p>
+            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+          </div>
+        </div>
+        <div class="mt-4 p-4 bg-slate-800/40 rounded-lg border border-slate-700/30">
+          <p class="text-slate-500 text-xs"><strong class="text-slate-400">AI Used:</strong> <span class="text-green-400">None</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="relative z-10 border-t border-pink-500/10 py-12 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="flex justify-center items-center gap-2 mb-4">
+      <span class="text-2xl">🌸</span>
+      <span class="font-serif text-pink-400 font-bold tracking-wide">YOZAKURA</span>
+    </div>
+    <p class="text-slate-500 text-sm mb-2">Great Explorations in the Arts (GEARTS) &nbsp;|&nbsp; BSIT 3A &nbsp;|&nbsp; FAITH Colleges</p>
+    <p class="text-slate-600 text-xs mb-6">© 2026 Catherine Joy P. Salazar. All rights reserved. This portfolio and all original artworks contained herein are the intellectual property of the student.</p>
+
+    <div class="glass-card p-4 max-w-lg mx-auto glow-border">
+      <p class="text-slate-400 text-xs">
+        <strong class="text-amber-300">⚠ Consent Form Notice:</strong>
+        The signed consent form for the use of personal data and image has been submitted separately via the official class portal.
+      </p>
+    </div>
+
+    <p class="text-slate-700 text-xs mt-8">Built with 🌸 and late nights &nbsp;•&nbsp; Yozakura Theme v1.0</p>
+  </div>
+</footer>
+
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// =============================================
+// 1. SAKURA PETAL CANVAS ANIMATION
+// =============================================
+(function() {
+  const canvas = document.getElementById('sakura-canvas');
+  const ctx = canvas.getContext('2d');
+  let petals = [], stars = [];
+  const PETAL_COUNT = 45;
+  const STAR_COUNT = 120;
+
+  class Star {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * window.innerWidth;
+      this.y = Math.random() * window.innerHeight;
+      this.r = Math.random() * 1.2 + 0.2;
+      this.baseOpacity = Math.random() * 0.5 + 0.1;
+      this.opacity = this.baseOpacity;
+      this.twinkleSpeed = Math.random() * 0.015 + 0.005;
+      this.twinkleOffset = Math.random() * Math.PI * 2;
+    }
+    update(t) {
+      this.opacity = this.baseOpacity + Math.sin(t * this.twinkleSpeed + this.twinkleOffset) * 0.15;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.max(0, this.opacity)})`;
+      ctx.fill();
+    }
+  }
+  for (let i = 0; i < STAR_COUNT; i++) stars.push(new Star());
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Petal {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x = Math.random() * canvas.width;
+      this.y = init ? Math.random() * canvas.height : -20;
+      this.size = Math.random() * 8 + 4;
+      this.speedY = Math.random() * 0.8 + 0.3;
+      this.speedX = Math.random() * 0.6 - 0.3;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.02;
+      this.opacity = Math.random() * 0.4 + 0.15;
+      this.wobble = Math.random() * Math.PI * 2;
+      this.wobbleSpeed = Math.random() * 0.02 + 0.005;
+    }
+    update() {
+      this.y += this.speedY;
+      this.wobble += this.wobbleSpeed;
+      this.x += this.speedX + Math.sin(this.wobble) * 0.3;
+      this.rotation += this.rotSpeed;
+      if (this.y > canvas.height + 20) this.reset(false);
+      if (this.x < -20) this.x = canvas.width + 20;
+      if (this.x > canvas.width + 20) this.x = -20;
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.opacity;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(this.size / 2, -this.size, this.size, -this.size / 2, 0, this.size);
+      ctx.bezierCurveTo(-this.size, -this.size / 2, -this.size / 2, -this.size, 0, 0);
+      ctx.fillStyle = `rgba(244, 114, 182, 1)`;
+      ctx.shadowColor = 'rgba(236, 72, 153, 0.6)';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal());
+
+  let tick = 0;
+  function animate() {
+    tick++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => { s.update(tick); s.draw(); });
+    petals.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// =============================================
+// 2. CUSTOM CURSOR WITH GLOW TRAIL
+// =============================================
+(function() {
+  const cursorDot = document.getElementById('cursor-dot');
+  const trailElements = [];
+  const TRAIL_COUNT = 8;
+
+  for (let i = 0; i < TRAIL_COUNT; i++) {
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.opacity = (1 - i / TRAIL_COUNT) * 0.4;
+    trail.style.width = (6 - i * 0.5) + 'px';
+    trail.style.height = (6 - i * 0.5) + 'px';
+    document.body.appendChild(trail);
+    trailElements.push({ el: trail, x: 0, y: 0 });
+  }
+
+  let mouseX = 0, mouseY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+  });
+
+  function animateTrail() {
+    let prevX = mouseX, prevY = mouseY;
+    trailElements.forEach((t, i) => {
+      const speed = 0.15 - i * 0.01;
+      t.x += (prevX - t.x) * speed;
+      t.y += (prevY - t.y) * speed;
+      t.el.style.left = t.x + 'px';
+      t.el.style.top = t.y + 'px';
+      prevX = t.x;
+      prevY = t.y;
+    });
+    requestAnimationFrame(animateTrail);
+  }
+  animateTrail();
+
+  // Hide on touch devices
+  if ('ontouchstart' in window) {
+    cursorDot.style.display = 'none';
+    trailElements.forEach(t => t.el.style.display = 'none');
+    document.body.style.cursor = 'auto';
+    document.querySelectorAll('*').forEach(el => el.style.cursor = 'auto');
+  }
+})();
+
+// =============================================
+// 3. LIGHTBOX MODAL
+// =============================================
+// To add a YouTube video to any entry, add:  youtube: 'https://www.youtube.com/watch?v=VIDEO_ID'
+// Shorts links also work: youtube: 'https://www.youtube.com/shorts/VIDEO_ID'
+// To add a main image to a Part II entry, add:  mediaSrc: 'images/YourFileName.jpg'
+const lightboxData = {
+  mod1: { title: 'Output 1: Scribble Art', type: 'Part I Output', desc: 'An artwork built from scribbled lines, shapes, and colors.', ai: 'No AI Used', medium: 'Drawing', mediaSrc: 'images/ScribbleArt.jpg' },
+  mod2: { title: 'Output 2: Book Spine Poetry', type: 'Part I Output', desc: 'A poem made by stacking books so the titles on the spines read as lines.', ai: 'No AI Used', medium: 'Found Poetry', gallery: ['images/BookSpinePoetry1.jpg', 'images/BookSpinePoetry2.jpg'] },
+  mod3: { title: 'Output 3: Coffee Painting', type: 'Part I Output', desc: 'A painting made with coffee as the paint.', ai: 'No AI Used', medium: 'Coffee on Paper', mediaSrc: 'images/CoffeePainting.jpg' },
+  mod4: { title: 'Output 4: Black Out Poetry', type: 'Part I Output', desc: 'A poem found by blacking out most of the words on a printed page.', ai: 'No AI Used', medium: 'Found Poetry', mediaSrc: 'images/BlackOutPoetry.jpg' },
+  mod5: { title: 'Output 5: Artwork Analysis (Video)', type: 'Part I Output', desc: 'A video where I look closely at an artwork and explain what I see in it.', ai: 'No AI Used', medium: 'Video' },
+  mod6: { title: 'Output 6: AI Art Appropriation', type: 'Part I Output', desc: 'An activity where existing art is reworked into a new piece using AI.', ai: 'AI Used', medium: 'Digital Art' },
+  mod7: { title: 'Output 7: Painting', type: 'Part I Output', desc: 'A painting made for the course.', ai: 'No AI Used', medium: 'Painting', mediaSrc: 'images/Painting.jpg' },
+  mod8: { title: 'Output 8: Multimedia Video', type: 'Part I Output', desc: 'A video that combines different kinds of media into one piece.', ai: 'No AI Used', medium: 'Video' },
+  art1: { title: 'Artwork 1: Photography', type: '100% Human-Made · NEW Work', desc: 'Full description coming soon.', ai: 'No AI Used', medium: 'Photography', img: true },
+  art2: { title: 'Artwork 2: Sculpting with Weaving and Painting', type: '100% Human-Made · NEW Work', desc: 'Full description coming soon.', ai: 'No AI Used', medium: 'Sculpture, Weaving, Painting', img: true },
+  art3: { title: 'Artwork 3: Dancing', type: '100% Human-Made · NEW Work', desc: 'Full description coming soon.', ai: 'No AI Used', medium: 'Dance', img: true },
+};
+
+// Turns a YouTube link into an embed link. Supports watch, youtu.be, embed, and Shorts.
+function parseYouTube(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if (!m) return null;
+  return { id: m[1], isShort: /\/shorts\//.test(url) };
+}
+
+function openLightbox(key) {
+  const data = lightboxData[key];
+  if (!data) return;
+  const body = document.getElementById('lightbox-body');
+
+  let mediaHtml = '';
+
+  // Gallery of several images
+  if (data.gallery && data.gallery.length) {
+    mediaHtml += data.gallery.map(src => `
+      <div class="w-full max-h-96 bg-slate-900/60 rounded-xl mb-4 overflow-hidden flex items-center justify-center border border-pink-500/30 shadow-lg shadow-pink-500/10">
+        <img src="${src}" alt="${data.title}" loading="lazy" class="w-full max-h-96 object-contain"/>
+      </div>`).join('');
+  }
+
+  // Single main media
+  if (data.mediaSrc) {
+    if (data.mediaType === 'video') {
+      mediaHtml += `
+        <div class="w-full max-h-96 bg-black rounded-xl mb-6 overflow-hidden flex items-center justify-center border border-pink-500/30 shadow-lg shadow-pink-500/10">
+          <video src="${data.mediaSrc}" controls class="w-full max-h-96 object-contain"></video>
+        </div>`;
+    } else if (data.mediaType === 'audio') {
+      mediaHtml += `
+        <div class="w-full p-6 bg-slate-800/80 rounded-xl mb-6 border border-pink-500/30 text-center">
+          <span class="text-4xl mb-2 inline-block">🎧</span>
+          <p class="text-pink-300 text-sm font-semibold mb-3">${data.title}</p>
+          <audio src="${data.mediaSrc}" controls class="w-full"></audio>
+        </div>`;
+    } else {
+      mediaHtml += `
+        <div class="w-full max-h-96 bg-slate-900/60 rounded-xl mb-6 overflow-hidden flex items-center justify-center border border-pink-500/30 shadow-lg shadow-pink-500/10">
+          <img src="${data.mediaSrc}" alt="${data.title}" loading="lazy" class="w-full max-h-96 object-contain"/>
+        </div>`;
+    }
+  } else if (data.img && !(data.gallery && data.gallery.length) && !data.youtube) {
+    mediaHtml += `
+      <div class="w-full h-64 bg-slate-800/60 rounded-xl mb-6 flex flex-col items-center justify-center border border-slate-700/40 gap-2">
+        <span class="text-3xl">🌸</span>
+        <span class="text-slate-400 text-sm font-medium">Artwork Preview</span>
+      </div>`;
+  }
+
+  // YouTube embed (16:9, Shorts supported)
+  const yt = parseYouTube(data.youtube);
+  if (yt) {
+    const wrapStyle = yt.isShort
+      ? 'aspect-ratio: 9 / 16; max-width: 320px; margin-left: auto; margin-right: auto;'
+      : 'aspect-ratio: 16 / 9; width: 100%;';
+    mediaHtml += `
+      <div class="bg-black rounded-xl mb-6 overflow-hidden border border-pink-500/30 shadow-lg shadow-pink-500/10" style="${wrapStyle}">
+        <iframe src="https://www.youtube.com/embed/${yt.id}" title="${data.title}" loading="lazy" style="width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>`;
+  }
+
+  body.innerHTML = `
+    <div class="text-center mb-6">
+      ${mediaHtml}
+      <h3 class="font-serif text-2xl text-white mb-1">${data.title}</h3>
+      <p class="text-pink-400 text-sm">${data.type}</p>
+      ${data.role ? `<p class="text-amber-300 text-xs mt-1">Role: ${data.role}</p>` : ''}
+    </div>
+    <div class="space-y-4">
+      <div class="bg-slate-800/40 rounded-lg p-4 border border-slate-700/30">
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Medium</p>
+        <p class="text-slate-300 text-sm">${data.medium}</p>
+      </div>
+      <div class="bg-slate-800/40 rounded-lg p-4 border border-slate-700/30">
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Description</p>
+        <p class="text-slate-300 text-sm leading-relaxed">${data.desc}</p>
+      </div>
+      <div class="bg-slate-800/40 rounded-lg p-4 border border-slate-700/30">
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">AI Usage Disclosure</p>
+        <p class="text-sm ${data.ai === 'No AI Used' ? 'text-green-400' : 'text-amber-300'}">${data.ai}</p>
+      </div>
+    </div>
+  `;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('lightbox').classList.remove('active');
+  document.getElementById('lightbox-body').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+// =============================================
+// 4. AMBIENT AUDIO SYNTH
+// =============================================
+let audioCtx, isPlaying = false, oscillators = [], gainNode;
+
+function initAudio() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioCtx.createGain();
+  gainNode.gain.value = 0;
+  gainNode.connect(audioCtx.destination);
+
+  // Soft ambient pad: layered sine waves
+  const freqs = [130.81, 196.00, 261.63, 329.63, 392.00]; // C3, G3, C4, E4, G4
+  freqs.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const oscGain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    oscGain.gain.value = 0.04 - i * 0.006;
+
+    // Subtle vibrato
+    const lfo = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    lfo.frequency.value = 0.3 + i * 0.1;
+    lfoGain.gain.value = 0.5;
+    lfo.connect(lfoGain);
+    lfoGain.connect(osc.frequency);
+    lfo.start();
+
+    osc.connect(oscGain);
+    oscGain.connect(gainNode);
+    osc.start();
+    oscillators.push({ osc, lfo, oscGain });
+  });
+}
+
+function toggleAudio() {
+  if (!audioCtx) initAudio();
+
+  if (isPlaying) {
+    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+    isPlaying = false;
+    document.getElementById('audio-bars').classList.add('paused');
+  } else {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 1.5);
+    isPlaying = true;
+    document.getElementById('audio-bars').classList.remove('paused');
+  }
+}
+
+// =============================================
+// 5. SCROLL REVEAL ANIMATIONS
+// =============================================
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// =============================================
+// 6. ACTIVE NAV HIGHLIGHT
+// =============================================
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => navObserver.observe(s));
+
+// =============================================
+// 7. MOBILE MENU AUTO-CLOSE
+// =============================================
+document.querySelectorAll('#mobile-nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.add('hidden');
+  });
+});
+
+// =============================================
+// 8. PRISM CAROUSEL ENGINE
+// =============================================
+(function() {
+  const slides = document.querySelectorAll('.prism-slide');
+  const dotsContainer = document.getElementById('prism-dots');
+  const totalSlides = slides.length;
+  let currentIndex = 0;
+  let isAnimating = false;
+
+  // Create indicator dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'prism-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function getSlideWidth() {
+    return window.innerWidth <= 480 ? 220 : window.innerWidth <= 768 ? 260 : 340;
+  }
+
+  function positionSlides(animate) {
+    const slideW = getSlideWidth();
+    const gap = window.innerWidth <= 768 ? 30 : 60;
+
+    slides.forEach((slide, i) => {
+      const offset = i - currentIndex;
+      const absOffset = Math.abs(offset);
+
+      const translateX = offset * (slideW * 0.55 + gap);
+      const translateZ = -absOffset * 120;
+      const rotateY = offset * -35;
+      const scale = absOffset === 0 ? 1 : Math.max(0.7, 1 - absOffset * 0.15);
+      const opacity = absOffset <= 2 ? Math.max(0.25, 1 - absOffset * 0.35) : 0;
+      const zIndex = totalSlides - absOffset;
+
+      slide.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+      slide.style.opacity = opacity;
+      slide.style.zIndex = zIndex;
+      slide.style.filter = absOffset === 0 ? 'brightness(1)' : `brightness(${0.6 - absOffset * 0.1})`;
+      slide.style.pointerEvents = absOffset === 0 ? 'auto' : 'none';
+
+      if (absOffset === 0) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    dotsContainer.querySelectorAll('.prism-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function triggerSweep() {
+    const activeSlide = slides[currentIndex];
+    activeSlide.classList.remove('sweeping');
+    void activeSlide.offsetWidth;
+    activeSlide.classList.add('sweeping');
+    activeSlide.addEventListener('animationend', () => {
+      activeSlide.classList.remove('sweeping');
+    }, { once: true });
+  }
+
+  function goTo(index) {
+    if (isAnimating || index === currentIndex) return;
+    isAnimating = true;
+    currentIndex = ((index % totalSlides) + totalSlides) % totalSlides;
+    positionSlides(true);
+    triggerSweep();
+    setTimeout(() => { isAnimating = false; }, 700);
+  }
+
+  window.prismGo = function(dir) {
+    goTo(currentIndex + dir);
+  };
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') prismGo(-1);
+    if (e.key === 'ArrowRight') prismGo(1);
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  const viewport = document.getElementById('prism-carousel');
+  viewport.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  viewport.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      prismGo(dx > 0 ? -1 : 1);
+    }
+  }, { passive: true });
+
+  // Click on side slides to navigate; click on active slide to open lightbox
+  const keys = ['art1', 'art2', 'art3'];
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', (e) => {
+      if (i !== currentIndex) {
+        e.stopPropagation();
+        goTo(i);
+      } else {
+        openLightbox(keys[i]);
+      }
+    });
+  });
+
+  // Init
+  positionSlides(false);
+  window.addEventListener('resize', () => positionSlides(false));
+})();
+</script>
+
+</body>
+</html>
