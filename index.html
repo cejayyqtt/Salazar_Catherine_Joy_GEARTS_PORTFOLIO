@@ -415,6 +415,7 @@
       width: 100%; height: 100%; min-height: 180px; max-height: 240px;
       object-fit: cover; border-radius: 0.75rem;
     }
+    .evidence-box iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 0.75rem; }
   </style>
 </head>
 
@@ -428,7 +429,7 @@
 
 <!-- ==================== LIGHTBOX MODAL ==================== -->
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
-  <div class="lightbox-content glass-card glow-border" onclick="event.stopPropagation()">
+  <div class="lightbox-content relative glass-card glow-border" onclick="event.stopPropagation()">
     <button onclick="closeLightbox()" class="absolute top-4 right-4 text-pink-400 hover:text-pink-300 text-2xl transition-colors">&times;</button>
     <div id="lightbox-body"></div>
   </div>
@@ -486,9 +487,9 @@
     <div class="glass-card glow-border p-6 md:p-8 text-left max-w-2xl mx-auto animate-glow-pulse">
       <h3 class="font-serif text-amber-300 text-sm tracking-widest uppercase mb-3">✦ Introductory Reflection</h3>
       <p class="text-slate-300 leading-relaxed text-sm md:text-base italic">
-        This portfolio collects my work for GEARTS. Part I shows all of my course outputs.
+        This portfolio collects my work for GEARTS. Part I shows all eight of my course activities.
         Part II shows three artworks that I made on my own. The final reflection and the
-        appendices with my proof of process are coming soon.
+        appendices with my proof of process follow after.
       </p>
     </div>
 
@@ -508,95 +509,95 @@
   </div>
 </section>
 
-<!-- ==================== PART I: ART APPRECIATION OUTPUTS ==================== -->
+<!-- ==================== PART I: ART APPRECIATION ACTIVITIES ==================== -->
 <section id="part1" class="relative py-24 px-6 z-10">
   <div class="kanji-watermark -top-8 right-4 md:right-20">芸術</div>
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16 reveal">
       <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Part I</p>
       <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">My Art Appreciation Journey</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">All eight of my GEARTS outputs, shown one by one with their AI usage.</p>
+      <p class="text-slate-400 max-w-xl mx-auto">All eight of my GEARTS activities, shown one by one with their AI usage.</p>
       <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-6"></div>
     </div>
 
-    <!-- FLEX CAROUSEL: COURSE OUTPUTS -->
+    <!-- FLEX CAROUSEL: ACTIVITIES -->
     <div class="mb-16 reveal">
-      <h3 class="font-serif text-xl text-amber-300 mb-6 text-center">✦ Course Outputs: Interactive Gallery</h3>
+      <h3 class="font-serif text-xl text-amber-300 mb-6 text-center">✦ Activities: Interactive Gallery</h3>
       <div class="flex-carousel">
-        <!-- Output 1 -->
+        <!-- Activity 1 -->
         <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(15,23,42,0.9)), url('images/ScribbleArt.jpg') center/cover;" onclick="openLightbox('mod1')">
-          <div class="absolute top-4 left-4 bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Output 1</div>
+          <div class="absolute top-4 left-4 bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Activity 1</div>
           <div class="fc-content">
             <h4 class="font-serif text-lg text-white font-semibold mb-1">Scribble Art</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
-        <!-- Output 2 -->
+        <!-- Activity 2 -->
         <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(252,211,77,0.1), rgba(15,23,42,0.9)), url('images/BookSpinePoetry1.jpg') center/cover;" onclick="openLightbox('mod2')">
-          <div class="absolute top-4 left-4 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Output 2</div>
+          <div class="absolute top-4 left-4 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Activity 2</div>
           <div class="fc-content">
-            <h4 class="font-serif text-lg text-white font-semibold mb-1">Book Spine Poetry</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Book-Spine Poetry</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
-        <!-- Output 3 -->
+        <!-- Activity 3 -->
         <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(15,23,42,0.9)), url('images/CoffeePainting.jpg') center/cover;" onclick="openLightbox('mod3')">
-          <div class="absolute top-4 left-4 bg-purple-500/20 backdrop-blur-sm text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">Output 3</div>
+          <div class="absolute top-4 left-4 bg-purple-500/20 backdrop-blur-sm text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">Activity 3</div>
           <div class="fc-content">
             <h4 class="font-serif text-lg text-white font-semibold mb-1">Coffee Painting</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
-        <!-- Output 4 -->
+        <!-- Activity 4 -->
         <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(15,23,42,0.9)), url('images/BlackOutPoetry.jpg') center/cover;" onclick="openLightbox('mod4')">
-          <div class="absolute top-4 left-4 bg-emerald-500/20 backdrop-blur-sm text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">Output 4</div>
+          <div class="absolute top-4 left-4 bg-emerald-500/20 backdrop-blur-sm text-emerald-300 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/30">Activity 4</div>
           <div class="fc-content">
             <h4 class="font-serif text-lg text-white font-semibold mb-1">Black Out Poetry</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
-        <!-- Output 5 -->
-        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(15,23,42,0.9)), url('') center/cover;" onclick="openLightbox('mod5')">
-          <div class="absolute top-4 left-4 bg-orange-500/20 backdrop-blur-sm text-orange-300 text-xs font-bold px-3 py-1 rounded-full border border-orange-500/30">Output 5</div>
+        <!-- Activity 5 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(251,146,60,0.12), rgba(15,23,42,0.9)), url('https://img.youtube.com/vi/p2IvBTeYL08/hqdefault.jpg') center/cover;" onclick="openLightbox('mod5')">
+          <div class="absolute top-4 left-4 bg-orange-500/20 backdrop-blur-sm text-orange-300 text-xs font-bold px-3 py-1 rounded-full border border-orange-500/30">Activity 5</div>
           <div class="fc-content">
-            <h4 class="font-serif text-lg text-white font-semibold mb-1">Artwork Analysis (Video)</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Film Analysis (Video Presentation)</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
-        <!-- Output 6 -->
-        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(56,189,248,0.1), rgba(15,23,42,0.9)), url('') center/cover;" onclick="openLightbox('mod6')">
-          <div class="absolute top-4 left-4 bg-sky-500/20 backdrop-blur-sm text-sky-300 text-xs font-bold px-3 py-1 rounded-full border border-sky-500/30">Output 6</div>
+        <!-- Activity 6 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(56,189,248,0.1), rgba(15,23,42,0.9)), url('images/AIArtAppropriation.jpg') center/cover;" onclick="openLightbox('mod6')">
+          <div class="absolute top-4 left-4 bg-sky-500/20 backdrop-blur-sm text-sky-300 text-xs font-bold px-3 py-1 rounded-full border border-sky-500/30">Activity 6</div>
           <div class="fc-content">
-            <h4 class="font-serif text-lg text-white font-semibold mb-1">AI Art Appropriation</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Art Appropriation (AI)</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-pink-500/20 text-pink-300 px-2 py-0.5 rounded-full">AI Used</span>
           </div>
         </div>
-        <!-- Output 7 -->
+        <!-- Activity 7 -->
         <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(15,23,42,0.9)), url('images/Painting.jpg') center/cover;" onclick="openLightbox('mod7')">
-          <div class="absolute top-4 left-4 bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Output 7</div>
+          <div class="absolute top-4 left-4 bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">Activity 7</div>
           <div class="fc-content">
-            <h4 class="font-serif text-lg text-white font-semibold mb-1">Painting</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Art Through Time Painting</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
-        <!-- Output 8 -->
-        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(252,211,77,0.1), rgba(15,23,42,0.9)), url('') center/cover;" onclick="openLightbox('mod8')">
-          <div class="absolute top-4 left-4 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Output 8</div>
+        <!-- Activity 8 -->
+        <div class="fc-item glass-card glow-border" style="background: linear-gradient(135deg, rgba(252,211,77,0.1), rgba(15,23,42,0.9)), url('https://img.youtube.com/vi/hOrh5H7dbiI/hqdefault.jpg') center/cover;" onclick="openLightbox('mod8')">
+          <div class="absolute top-4 left-4 bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Activity 8</div>
           <div class="fc-content">
-            <h4 class="font-serif text-lg text-white font-semibold mb-1">Multimedia Video</h4>
-            <p class="text-slate-400 text-xs mb-2">Part I Output</p>
+            <h4 class="font-serif text-lg text-white font-semibold mb-1">Multimedia Art</h4>
+            <p class="text-slate-400 text-xs mb-2">Part I Activity</p>
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">No AI Used</span>
           </div>
         </div>
       </div>
-      <p class="text-slate-500 text-xs text-center mt-4 italic">↔ Hover over each output to expand &nbsp;•&nbsp; Click for details</p>
+      <p class="text-slate-500 text-xs text-center mt-4 italic">↔ Hover over each activity to expand &nbsp;•&nbsp; Click for details</p>
     </div>
 
     <!-- DETAILED TIMELINE -->
@@ -608,9 +609,9 @@
         <div class="relative flex flex-col md:flex-row items-center gap-6">
           <div class="md:w-1/2 md:text-right md:pr-12">
             <div class="glass-card p-6 glow-border">
-              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 1</span>
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Activity 1</span>
               <h4 class="font-serif text-xl text-white mt-2 mb-2">Scribble Art</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">An artwork built from scribbled lines, shapes, and colors.</p>
+              <p class="text-slate-400 text-sm leading-relaxed">An artwork that grew from free-flowing scribbles into a tree, still growing, just like me.</p>
               <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
                 <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Drawing</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
@@ -627,9 +628,9 @@
           <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
           <div class="md:w-1/2 md:pl-12">
             <div class="glass-card p-6 glow-border-gold">
-              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 2</span>
-              <h4 class="font-serif text-xl text-white mt-2 mb-2">Book Spine Poetry</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">A poem made by stacking books so the titles on the spines read as lines.</p>
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Activity 2</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Book-Spine Poetry</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A group poem made from library book spines, with love as the theme.</p>
               <div class="mt-3 flex flex-wrap gap-2">
                 <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Found Poetry</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
@@ -642,9 +643,9 @@
         <div class="relative flex flex-col md:flex-row items-center gap-6">
           <div class="md:w-1/2 md:text-right md:pr-12">
             <div class="glass-card p-6 glow-border">
-              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 3</span>
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Activity 3</span>
               <h4 class="font-serif text-xl text-white mt-2 mb-2">Coffee Painting</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">A painting made with coffee as the paint.</p>
+              <p class="text-slate-400 text-sm leading-relaxed">A painting built from many shades of coffee.</p>
               <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
                 <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Painting</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
@@ -661,9 +662,9 @@
           <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
           <div class="md:w-1/2 md:pl-12">
             <div class="glass-card p-6 glow-border-gold">
-              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 4</span>
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Activity 4</span>
               <h4 class="font-serif text-xl text-white mt-2 mb-2">Black Out Poetry</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">A poem found by blacking out most of the words on a printed page.</p>
+              <p class="text-slate-400 text-sm leading-relaxed">A poem found in a small piece of newspaper.</p>
               <div class="mt-3 flex flex-wrap gap-2">
                 <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Found Poetry</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
@@ -676,11 +677,11 @@
         <div class="relative flex flex-col md:flex-row items-center gap-6">
           <div class="md:w-1/2 md:text-right md:pr-12">
             <div class="glass-card p-6 glow-border">
-              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 5</span>
-              <h4 class="font-serif text-xl text-white mt-2 mb-2">Artwork Analysis (Video)</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">A video where I look closely at an artwork and explain what I see in it.</p>
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Activity 5</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Film Analysis (Video Presentation)</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A group film analysis of Balota and the realities of voting in the Philippines.</p>
               <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
-                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Video</span>
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Video Presentation</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
               </div>
             </div>
@@ -695,9 +696,9 @@
           <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
           <div class="md:w-1/2 md:pl-12">
             <div class="glass-card p-6 glow-border-gold">
-              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 6</span>
-              <h4 class="font-serif text-xl text-white mt-2 mb-2">AI Art Appropriation</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">An activity where existing art is reworked into a new piece using AI.</p>
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Activity 6</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Art Appropriation of Western Art using AI</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">Caravaggio's "Narcissus" reimagined with a smartphone screen as the mirror.</p>
               <div class="mt-3 flex flex-wrap gap-2">
                 <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Digital Art</span>
                 <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">⚡ AI Used</span>
@@ -710,9 +711,9 @@
         <div class="relative flex flex-col md:flex-row items-center gap-6">
           <div class="md:w-1/2 md:text-right md:pr-12">
             <div class="glass-card p-6 glow-border">
-              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Output 7</span>
-              <h4 class="font-serif text-xl text-white mt-2 mb-2">Painting</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">A painting made for the course.</p>
+              <span class="text-pink-400 text-xs font-bold tracking-widest uppercase">Activity 7</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Art Through Time Painting Activity</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A vibrant painting made for the Art Through Time activity.</p>
               <div class="mt-3 flex flex-wrap gap-2 md:justify-end">
                 <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Painting</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
@@ -729,11 +730,11 @@
           <div class="hidden md:flex w-4 h-4 bg-amber-400 rounded-full border-4 border-slate-900 z-10 shadow-lg shadow-amber-400/30"></div>
           <div class="md:w-1/2 md:pl-12">
             <div class="glass-card p-6 glow-border-gold">
-              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Output 8</span>
-              <h4 class="font-serif text-xl text-white mt-2 mb-2">Multimedia Video</h4>
-              <p class="text-slate-400 text-sm leading-relaxed">A video that combines different kinds of media into one piece.</p>
+              <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Activity 8</span>
+              <h4 class="font-serif text-xl text-white mt-2 mb-2">Multimedia Art</h4>
+              <p class="text-slate-400 text-sm leading-relaxed">A multimedia video I edited, with my groupmates acting.</p>
               <div class="mt-3 flex flex-wrap gap-2">
-                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Video</span>
+                <span class="text-[10px] bg-slate-700/60 text-slate-300 px-2 py-0.5 rounded-full">Multimedia</span>
                 <span class="text-[10px] bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">✓ No AI Used</span>
               </div>
             </div>
@@ -752,7 +753,7 @@
     <div class="text-center mb-16 reveal">
       <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Part II</p>
       <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">My Artistic Exploration</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Three artworks across three art forms: photography, sculpting with weaving and painting, and dance.</p>
+      <p class="text-slate-400 max-w-xl mx-auto">Three artworks across three art forms: photography, crafts from recycled materials, and soap carving.</p>
       <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-6"></div>
     </div>
 
@@ -765,51 +766,51 @@
           <div class="prism-slide" data-index="0">
             <div class="prism-glow"></div>
             <div class="prism-inner">
-              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(236,72,153,0.25) 0%, rgba(15,23,42,0.95) 60%, rgba(139,92,246,0.1) 100%);"></div>
+              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(236,72,153,0.25) 0%, rgba(15,23,42,0.85) 60%, rgba(139,92,246,0.1) 100%), url('images/Photography4.jpg') center/cover;"></div>
               <div class="prism-badge-row">
                 <span class="bg-pink-500/20 backdrop-blur-sm text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">01 · Photography</span>
                 <span class="bg-green-500/20 backdrop-blur-sm text-green-300 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">100% Human-Made</span>
               </div>
               <div class="prism-info">
-                <h4 class="font-serif text-xl text-white font-semibold mb-1">Photography</h4>
-                <p class="text-slate-400 text-xs mb-1">Photography</p>
-                <p class="text-slate-500 text-xs mb-3">Full details coming soon.</p>
+                <h4 class="font-serif text-xl text-white font-semibold mb-1">Chasing Skies</h4>
+                <p class="text-slate-400 text-xs mb-1">Photography · Light, Color &amp; Composition</p>
+                <p class="text-slate-500 text-xs mb-3">Capturing the changing colors and atmosphere of the sky.</p>
                 <a href="#appendix1" class="inline-block text-[10px] bg-pink-500/30 text-pink-200 px-3 py-1 rounded-full hover:bg-pink-500/50 transition-colors" onclick="event.stopPropagation()">View Proof of Process (Appendix 1) →</a>
               </div>
             </div>
           </div>
 
-          <!-- Slide 2: Sculpting with Weaving and Painting -->
+          <!-- Slide 2: Crafts Using Recycled Materials -->
           <div class="prism-slide" data-index="1">
             <div class="prism-glow"></div>
             <div class="prism-inner">
-              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(252,211,77,0.2) 0%, rgba(15,23,42,0.95) 60%, rgba(236,72,153,0.08) 100%);"></div>
+              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(252,211,77,0.2) 0%, rgba(15,23,42,0.85) 60%, rgba(236,72,153,0.08) 100%), url('images/Craft.JPEG') center/cover;"></div>
               <div class="prism-badge-row">
-                <span class="bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">02 · Sculpting</span>
+                <span class="bg-amber-500/20 backdrop-blur-sm text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">02 · Recycled Crafts</span>
                 <span class="bg-green-500/20 backdrop-blur-sm text-green-300 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">100% Human-Made</span>
               </div>
               <div class="prism-info">
-                <h4 class="font-serif text-xl text-white font-semibold mb-1">Sculpting with Weaving and Painting</h4>
-                <p class="text-slate-400 text-xs mb-1">Sculpture, Weaving, Painting</p>
-                <p class="text-slate-500 text-xs mb-3">Full details coming soon.</p>
+                <h4 class="font-serif text-xl text-white font-semibold mb-1">Crafts Using Recycled Materials</h4>
+                <p class="text-slate-400 text-xs mb-1">Weaving, Painting</p>
+                <p class="text-slate-500 text-xs mb-3">Old materials, given new life.</p>
                 <a href="#appendix2" class="inline-block text-[10px] bg-amber-500/30 text-amber-200 px-3 py-1 rounded-full hover:bg-amber-500/50 transition-colors" onclick="event.stopPropagation()">View Proof of Process (Appendix 2) →</a>
               </div>
             </div>
           </div>
 
-          <!-- Slide 3: Dancing -->
+          <!-- Slide 3: Soap Carving -->
           <div class="prism-slide" data-index="2">
             <div class="prism-glow"></div>
             <div class="prism-inner">
-              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(15,23,42,0.95) 60%, rgba(252,211,77,0.08) 100%);"></div>
+              <div class="prism-bg" style="background: linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(15,23,42,0.85) 60%, rgba(252,211,77,0.08) 100%), url('images/SoapCarving.PNG') center/cover;"></div>
               <div class="prism-badge-row">
-                <span class="bg-purple-500/20 backdrop-blur-sm text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">03 · Dancing</span>
+                <span class="bg-purple-500/20 backdrop-blur-sm text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">03 · Soap Carving</span>
                 <span class="bg-green-500/20 backdrop-blur-sm text-green-300 text-[10px] px-2 py-0.5 rounded-full border border-green-500/30">100% Human-Made</span>
               </div>
               <div class="prism-info">
-                <h4 class="font-serif text-xl text-white font-semibold mb-1">Dancing</h4>
-                <p class="text-slate-400 text-xs mb-1">Dance</p>
-                <p class="text-slate-500 text-xs mb-3">Full details coming soon.</p>
+                <h4 class="font-serif text-xl text-white font-semibold mb-1">Sculpting/Soap Carving</h4>
+                <p class="text-slate-400 text-xs mb-1">Sculpture</p>
+                <p class="text-slate-500 text-xs mb-3">Carved by hand, one cut at a time.</p>
                 <a href="#appendix3" class="inline-block text-[10px] bg-purple-500/30 text-purple-200 px-3 py-1 rounded-full hover:bg-purple-500/50 transition-colors" onclick="event.stopPropagation()">View Proof of Process (Appendix 3) →</a>
               </div>
             </div>
@@ -841,56 +842,35 @@
     </div>
 
     <div class="space-y-8">
-      <!-- Reflection Prompt 1 -->
+
+    <!-- Integrated Final Reflection -->
       <div class="glass-card glow-border p-6 md:p-8 reveal">
         <div class="flex items-start gap-4">
           <span class="text-2xl mt-1">🌸</span>
           <div>
-            <h4 class="font-serif text-lg text-pink-400 mb-2">How has this course changed my understanding of art?</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
+            <h4 class="font-serif text-lg text-pink-400 mb-4">Looking Forward</h4>
+
+            <div class="space-y-4">
+              <p class="text-slate-300 leading-relaxed text-sm">
+                Before taking this course, I thought art was something simple and mostly limited to drawings or paintings. But throughout GEARTS, I learned that art can take many different forms, including poetry and other ways of expressing ideas and emotions. I was surprised to discover that even poems can be portrayed in different ways. It made me realize that art is not limited to what we usually see, but can also be found in words, feelings, and experiences.
+              </p>
+
+              <p class="text-slate-300 leading-relaxed text-sm">
+                I also discovered something about myself through the activities. I may not be the most artistic person, and I used to think that making art was tiring or troublesome. However, as I tried different activities, I realized that I actually enjoy creating something of my own. I learned that I do not have to be naturally talented or produce something perfect to appreciate the process.
+              </p>
+
+              <p class="text-slate-300 leading-relaxed text-sm">
+                More than just trying different art forms, art also became a way for me to express things that I usually keep to myself. I am not someone who easily shows or talks about what I feel, especially when it comes to personal struggles involving my mental health and family. Through art, I can express emotions and experiences that are sometimes difficult to put into words. It gives me a way to be honest about what I feel without having to explain everything out loud.
+              </p>
+
+              <p class="text-slate-300 leading-relaxed text-sm">
+                Looking back, I think I am becoming someone who is learning to recognize and embrace my imperfections. This course reminded me that things do not always have to be perfect to have meaning. I am still learning to accept myself and become more confident in who I am. I hope that as I continue growing and exploring different things, I will become someone who can look at herself with more pride and appreciate the person she is becoming.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Reflection Prompt 2 -->
-      <div class="glass-card glow-border-gold p-6 md:p-8 reveal">
-        <div class="flex items-start gap-4">
-          <span class="text-2xl mt-1">🎨</span>
-          <div>
-            <h4 class="font-serif text-lg text-amber-300 mb-2">What did I discover about myself through creating art?</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reflection Prompt 3 -->
-      <div class="glass-card glow-border p-6 md:p-8 reveal">
-        <div class="flex items-start gap-4">
-          <span class="text-2xl mt-1">🌙</span>
-          <div>
-            <h4 class="font-serif text-lg text-pink-400 mb-2">How does art connect to my identity, culture, or values?</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reflection Prompt 4 -->
-      <div class="glass-card glow-border-gold p-6 md:p-8 reveal">
-        <div class="flex items-start gap-4">
-          <span class="text-2xl mt-1">✨</span>
-          <div>
-            <h4 class="font-serif text-lg text-amber-300 mb-2">Where do I go from here? Who am I becoming?</h4>
-            <p class="text-slate-300 leading-relaxed text-sm">Coming soon.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Usage Disclosure -->
-      <div class="glass-card p-6 border border-slate-700/50 reveal">
-        <h4 class="font-serif text-sm text-slate-400 tracking-widest uppercase mb-3">✦ AI Usage Disclosure: Final Reflection</h4>
-        <p class="text-slate-500 text-sm">
-          The AI usage disclosure for the final reflection will be added when the reflection is finished.
-        </p>
       </div>
     </div>
   </div>
@@ -903,7 +883,7 @@
     <div class="text-center mb-16 reveal">
       <p class="text-pink-400 text-sm tracking-[0.3em] uppercase font-medium mb-2">Appendices</p>
       <h2 class="font-serif text-3xl md:text-5xl font-bold text-slate-100 mb-3">Proof of Work and Authenticity</h2>
-      <p class="text-slate-400 max-w-xl mx-auto">Proof of process for each Part II artwork: sketches, work in progress, final work, links, and screenshots.</p>
+      <p class="text-slate-400 max-w-xl mx-auto">Proof of process for each Part II artwork: photo metadata, work-in-progress photos, and a process video.</p>
       <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent mx-auto mt-6"></div>
     </div>
 
@@ -914,21 +894,23 @@
           <span class="bg-pink-500/20 text-pink-300 text-xs font-bold px-3 py-1 rounded-full border border-pink-500/30">APPENDIX 1</span>
           <h3 class="font-serif text-xl text-white">Photography: Proof of Process</h3>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <p class="text-slate-400 text-sm mb-4">Metadata screenshots showing the original details of each photograph.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="evidence-box">
-            <span class="text-3xl mb-2">📷</span>
-            <p class="text-slate-500 text-sm">Raw / Unedited Photo</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/PhotographyProof1.PNG" alt="Photo metadata 1">
+            <p class="text-slate-400 text-xs mt-2">Metadata: Photo 1</p>
           </div>
           <div class="evidence-box">
-            <span class="text-3xl mb-2">🖥️</span>
-            <p class="text-slate-500 text-sm">Editing Process Screenshot</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/PhotographyProof2.PNG" alt="Photo metadata 2">
+            <p class="text-slate-400 text-xs mt-2">Metadata: Photo 2</p>
           </div>
           <div class="evidence-box">
-            <span class="text-3xl mb-2">🌟</span>
-            <p class="text-slate-500 text-sm">Final Photo</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/PhotographyProof3.PNG" alt="Photo metadata 3">
+            <p class="text-slate-400 text-xs mt-2">Metadata: Photo 3</p>
+          </div>
+          <div class="evidence-box">
+            <img src="images/PhotographyProof4.PNG" alt="Photo metadata 4">
+            <p class="text-slate-400 text-xs mt-2">Metadata: Photo 4</p>
           </div>
         </div>
         <div class="mt-4 p-4 bg-slate-800/40 rounded-lg border border-slate-700/30">
@@ -942,23 +924,40 @@
       <div class="glass-card p-6 md:p-8">
         <div class="flex items-center gap-3 mb-6">
           <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">APPENDIX 2</span>
-          <h3 class="font-serif text-xl text-white">Sculpting with Weaving and Painting: Proof of Process</h3>
+          <h3 class="font-serif text-xl text-white">Crafts Using Recycled Materials (Weaving, Painting): Proof of Process</h3>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="evidence-box">
-            <span class="text-3xl mb-2">✏️</span>
-            <p class="text-slate-500 text-sm">Design Sketch</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/CraftsProof1.JPEG" alt="Work in progress 1">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 1</p>
           </div>
           <div class="evidence-box">
-            <span class="text-3xl mb-2">🔨</span>
-            <p class="text-slate-500 text-sm">Work in Progress</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/CraftsProof2.JPEG" alt="Work in progress 2">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 2</p>
           </div>
           <div class="evidence-box">
-            <span class="text-3xl mb-2">🏺</span>
-            <p class="text-slate-500 text-sm">Finished Artwork Photo</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/CraftsProof3.JPEG" alt="Work in progress 3">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 3</p>
+          </div>
+          <div class="evidence-box">
+            <img src="images/CraftsProof4.JPEG" alt="Work in progress 4">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 4</p>
+          </div>
+          <div class="evidence-box">
+            <img src="images/CraftsProof5.JPEG" alt="Work in progress 5">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 5</p>
+          </div>
+          <div class="evidence-box">
+            <img src="images/CraftsProof6.PNG" alt="Work in progress 6">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 6</p>
+          </div>
+          <div class="evidence-box">
+            <img src="images/CraftsProof7.PNG" alt="Work in progress 7">
+            <p class="text-slate-400 text-xs mt-2">Work in Progress 7</p>
+          </div>
+          <div class="evidence-box">
+            <img src="images/Craft.JPEG" alt="Finished craft">
+            <p class="text-slate-400 text-xs mt-2">Finished Artwork</p>
           </div>
         </div>
         <div class="mt-4 p-4 bg-slate-800/40 rounded-lg border border-slate-700/30">
@@ -972,23 +971,16 @@
       <div class="glass-card p-6 md:p-8">
         <div class="flex items-center gap-3 mb-6">
           <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">APPENDIX 3</span>
-          <h3 class="font-serif text-xl text-white">Dancing: Proof of Process</h3>
+          <h3 class="font-serif text-xl text-white">Sculpting/Soap Carving: Proof of Process</h3>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="evidence-box">
-            <span class="text-3xl mb-2">📝</span>
-            <p class="text-slate-500 text-sm">Choreography Notes / Plan</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <img src="images/SoapCarvingProof2.jpeg" alt="Soap carving proof">
+            <p class="text-slate-400 text-xs mt-2">Soap Carving Proof</p>
           </div>
           <div class="evidence-box">
-            <span class="text-3xl mb-2">🎥</span>
-            <p class="text-slate-500 text-sm">Rehearsal Screenshot</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
-          </div>
-          <div class="evidence-box">
-            <span class="text-3xl mb-2">💃</span>
-            <p class="text-slate-500 text-sm">Final Performance Video</p>
-            <p class="text-slate-600 text-xs mt-1">Coming soon</p>
+            <iframe src="https://www.youtube.com/embed/e-qu4XczQWo" title="Soap carving video" loading="lazy" allowfullscreen></iframe>
+            <p class="text-slate-400 text-xs mt-2">Soap Carving Process Video</p>
           </div>
         </div>
         <div class="mt-4 p-4 bg-slate-800/40 rounded-lg border border-slate-700/30">
@@ -1172,19 +1164,31 @@
 // =============================================
 // To add a YouTube video to any entry, add:  youtube: 'https://www.youtube.com/watch?v=VIDEO_ID'
 // Shorts links also work: youtube: 'https://www.youtube.com/shorts/VIDEO_ID'
-// To add a main image to a Part II entry, add:  mediaSrc: 'images/YourFileName.jpg'
+// To add a main image to an entry, add:  mediaSrc: 'images/YourFileName.jpg'
 const lightboxData = {
-  mod1: { title: 'Output 1: Scribble Art', type: 'Part I Output', desc: 'An artwork built from scribbled lines, shapes, and colors.', ai: 'No AI Used', medium: 'Drawing', mediaSrc: 'images/ScribbleArt.jpg' },
-  mod2: { title: 'Output 2: Book Spine Poetry', type: 'Part I Output', desc: 'A poem made by stacking books so the titles on the spines read as lines.', ai: 'No AI Used', medium: 'Found Poetry', gallery: ['images/BookSpinePoetry1.jpg', 'images/BookSpinePoetry2.jpg'] },
-  mod3: { title: 'Output 3: Coffee Painting', type: 'Part I Output', desc: 'A painting made with coffee as the paint.', ai: 'No AI Used', medium: 'Coffee on Paper', mediaSrc: 'images/CoffeePainting.jpg' },
-  mod4: { title: 'Output 4: Black Out Poetry', type: 'Part I Output', desc: 'A poem found by blacking out most of the words on a printed page.', ai: 'No AI Used', medium: 'Found Poetry', mediaSrc: 'images/BlackOutPoetry.jpg' },
-  mod5: { title: 'Output 5: Artwork Analysis (Video)', type: 'Part I Output', desc: 'A video where I look closely at an artwork and explain what I see in it.', ai: 'No AI Used', medium: 'Video' },
-  mod6: { title: 'Output 6: AI Art Appropriation', type: 'Part I Output', desc: 'An activity where existing art is reworked into a new piece using AI.', ai: 'AI Used', medium: 'Digital Art' },
-  mod7: { title: 'Output 7: Painting', type: 'Part I Output', desc: 'A painting made for the course.', ai: 'No AI Used', medium: 'Painting', mediaSrc: 'images/Painting.jpg' },
-  mod8: { title: 'Output 8: Multimedia Video', type: 'Part I Output', desc: 'A video that combines different kinds of media into one piece.', ai: 'No AI Used', medium: 'Video' },
-  art1: { title: 'Artwork 1: Photography', type: '100% Human-Made · NEW Work', desc: 'Full description coming soon.', ai: 'No AI Used', medium: 'Photography', img: true },
-  art2: { title: 'Artwork 2: Sculpting with Weaving and Painting', type: '100% Human-Made · NEW Work', desc: 'Full description coming soon.', ai: 'No AI Used', medium: 'Sculpture, Weaving, Painting', img: true },
-  art3: { title: 'Artwork 3: Dancing', type: '100% Human-Made · NEW Work', desc: 'Full description coming soon.', ai: 'No AI Used', medium: 'Dance', img: true },
+  mod1: { title: 'Activity 1: Scribble Art', type: 'Part I Activity', desc: 'Scribble art starts without a plan. I let my hand move freely, then looked for shapes inside the tangle of lines. In my latest piece, what emerged looked like me: a tree that is still growing. It reminded me that I do not have to be finished to be worth showing.', ai: 'No AI Used', medium: 'Drawing', mediaSrc: 'images/ScribbleArt.jpg' },
+  mod2: { title: 'Activity 2: Book-Spine Poetry', type: 'Part I Activity', role: 'Group Work', desc: 'A group activity. We searched the library for books and gathered the titles that caught our eyes. The theme was love, and most of the books were not obviously about it. But once we put the spines together, the lines became a poem. Pieces that did not seem to fit turned out beautiful together.', ai: 'No AI Used', medium: 'Found Poetry', gallery: ['images/BookSpinePoetry1.jpg', 'images/BookSpinePoetry2.jpg'] },
+  mod3: { title: 'Activity 3: Coffee Painting', type: 'Part I Activity', desc: 'I used many shades of coffee to build tones, light, and shadow. I remember bringing so many cups just to get every shade. A drink I enjoy every day became my paint, and the warm, imperfect browns gave the painting a quiet, personal feel.', ai: 'No AI Used', medium: 'Coffee on Paper', mediaSrc: 'images/CoffeePainting.jpg' },
+  mod4: { title: 'Activity 4: Black Out Poetry', type: 'Part I Activity', desc: 'It started with just a small piece of newspaper. I kept a few words and blacked out the rest, and I was surprised by the sentence that appeared. What you leave out can shape meaning as much as what you keep.', ai: 'No AI Used', medium: 'Found Poetry', mediaSrc: 'images/BlackOutPoetry.jpg' },
+  mod5: { title: 'Activity 5: Film Analysis (Video Presentation)', type: 'Part I Activity', role: 'Group Work', desc: 'A group video presentation analyzing the film Balota. We enjoyed watching it because it reflects reality: the danger that comes with voting and politics in the Philippines. Analyzing it made us look at elections, and the people involved in them, more seriously.', ai: 'No AI Used', medium: 'Video Presentation', youtube: 'https://youtu.be/p2IvBTeYL08' },
+  mod6: { title: 'Activity 6: Art Appropriation of Western Art using AI', type: 'Part I Activity', desc: 'A reimagining of Caravaggio\'s "Narcissus," where the pool of water becomes a smartphone screen. It reflects my reality right now: I struggle with how I see myself in mirrors and reflections. Instead of admiring my reflection like Narcissus, I am looking at it with doubt. The piece shows how screens and mirrors shape the way we see ourselves.', ai: 'AI Used', aiDetails: `Tool: Gemini. I uploaded my own photo and asked Gemini to recreate Caravaggio's "Narcissus" with my face, a smartphone screen in place of the water, and Baroque chiaroscuro lighting. Key prompt: "Create a Baroque-style oil painting inspired by Caravaggio's 'Narcissus.' Use my uploaded photo as the face of the person kneeling and leaning over, in the same pose and composition as the original painting, with a dramatic dark background and strong light from the upper left. The person wears a simple modest top with soft fabric folds. Instead of a pool of water, the person leans over a dark glossy smartphone screen lying flat on the ground, acting like a mirror. In the reflection, my face looks calm and softly smiling, natural with real skin texture, not smoothed or beautified. Keep the moody chiaroscuro lighting and rich dark tones. Oil painting look, no text." Revision: I asked Gemini to change only the red T-shirt to a loose cream-colored blouse with puffy, softly wrinkled sleeves and keep everything else the same.`, medium: 'Digital Art (AI-generated)', mediaSrc: 'images/AIArtAppropriation.jpg' },
+  mod7: { title: 'Activity 7: Art Through Time Painting Activity', type: 'Part I Activity', desc: 'I enjoyed this painting activity a lot. I used vibrant colors to show how art changes across time, while still putting my own style into it. Painting freely, with bold color, was one of the most fun parts of the course.', ai: 'No AI Used', medium: 'Painting', mediaSrc: 'images/Painting.jpg' },
+  mod8: { title: 'Activity 8: Multimedia Art', type: 'Part I Activity', role: 'Video Editor (Group Work)', desc: 'A multimedia artwork titled "Laugh About Today." I edited the video myself, while my groupmates acted in it. Putting together footage, sound, and effects showed me how editing shapes the mood of a story.', ai: 'No AI Used', medium: 'Multimedia Video', youtube: 'https://youtu.be/hOrh5H7dbiI' },
+  art1: {
+          title: 'Artwork 1: Chasing Skies (Photography)',
+          type: '100% Human-Made · NEW Work',
+          desc: 'This photography collection focuses on capturing the changing colors, light, and atmosphere of the sky. Each photograph presents a different moment, showing how natural light and colors can create different moods and compositions. Through this work, I explored how photography can turn ordinary scenes into something worth appreciating.',
+          ai: 'No AI Used',
+          medium: 'Photography',
+          gallery: [
+            'images/Photography4.jpg',
+            'images/Photography1.jpg',
+            'images/Photography2.jpg',
+            'images/Photography3.jpg'
+          ]
+        },
+  art2: { title: 'Artwork 2: Crafts Using Recycled Materials (Weaving, Painting)', type: '100% Human-Made · OLD Work', desc: 'A craft made from recycled materials, combining weaving and painting. It turns things that would normally be thrown away into something new and meaningful, showing that creativity does not need new materials.', ai: 'No AI Used', medium: 'Recycled Materials, Weaving, Painting', mediaSrc: 'images/Craft.JPEG' },
+  art3: { title: 'Artwork 3: Sculpting/Soap Carving', type: '100% Human-Made · NEW Work', desc: 'A sculpture carved by hand from a bar of soap. Carving is slow and unforgiving, because every cut is permanent, so it taught me patience and careful planning. The full process is shown in the video.', ai: 'No AI Used', medium: 'Sculpture, Soap Carving', mediaSrc: 'images/SoapCarving.PNG', youtube: 'https://youtu.be/e-qu4XczQWo' },
 };
 
 // Turns a YouTube link into an embed link. Supports watch, youtu.be, embed, and Shorts.
@@ -1269,6 +1273,7 @@ function openLightbox(key) {
       <div class="bg-slate-800/40 rounded-lg p-4 border border-slate-700/30">
         <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">AI Usage Disclosure</p>
         <p class="text-sm ${data.ai === 'No AI Used' ? 'text-green-400' : 'text-amber-300'}">${data.ai}</p>
+        ${data.aiDetails ? `<p class="text-slate-400 text-xs leading-relaxed mt-2">${data.aiDetails}</p>` : ''}
       </div>
     </div>
   `;
